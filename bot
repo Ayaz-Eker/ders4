@@ -1,0 +1,47 @@
+import discord
+import random
+import bot_mantik
+import random
+from bot_mantik import gen_pass
+    
+
+
+    def emoji_olusturucu():
+    emojis = ["😀", "😂", "😍", "😎", "🤔", "🙈", "🎉", "🚀", "🌟", "🍕"]
+    return random.choice(emojis)
+       
+
+
+
+def yazi_tura():
+    para = random.randint(0, 1)
+    if para == 0:
+        return "YAZI"
+    else:
+        return "TURA"
+
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print(f'{client.user} olarak giriş yapıldı')
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$hello'):
+        await message.channel.send("Merhaba!")
+    
+    elif message.content.startswith('$sifre'):
+        sifre = bot_mantik.gen_pass()
+        await message.channel.send(f"$sifreniz: {sifre}")
+
+    elif message.content.startswith('$yazitura'):
+        sonuc = yazi_tura()
+        await message.channel.send(sonuc)
+
+client.run("MTQ3NDExMTA5NzY3MzA5MzE4MQ.G1mJY4.B-NJrLS8XrWtspzPBF5pQzWd63Bvv_D9fhG9EU")
