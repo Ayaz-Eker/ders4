@@ -38,7 +38,7 @@ async def dog(ctx):
     '''dog komutunu çağırdığımızda, program ordek_resmi_urlsi_al fonksiyonunu çağırır.'''
     image_url = get_dog_image_url({"fileSizeBytes":2494547,"url":"https://random.dog/c6f538b3-92d0-4a81-a4da-9da68f075e55.mp4"})
     await ctx.send(image_url)
-bot.run("MTQ3NDExMTA5NzY3MzA5MzE4MQ.GxAnNO.sNnhaoMA007cyjFoI40ek1BHrk13pRvMTapHjY")
+bot.run("token")
 
 
 
