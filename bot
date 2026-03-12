@@ -1,47 +1,59 @@
-import discord
-import random
-import bot_mantik
-import random
-from bot_mantik import gen_pass
+
+
     
+  
 
 
-    def emoji_olusturucu():
-    emojis = ["😀", "😂", "😍", "😎", "🤔", "🙈", "🎉", "🚀", "🌟", "🍕"]
-    return random.choice(emojis)
-       
+import discord
 
-
-
-def yazi_tura():
-    para = random.randint(0, 1)
-    if para == 0:
-        return "YAZI"
-    else:
-        return "TURA"
+import requests
+from discord.ext import commands
+import os, random
 
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix='$', intents=intents)
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f'{client.user} olarak giriş yapıldı')
+    print(f'We have logged in as {bot.user}')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@bot.command()
+async def mem(ctx):
+    with open('images/mem1.webp', 'rb') as f:
+        # Dönüştürülen Discord kütüphane dosyasını bu değişkende saklayalım!
+        picture = discord.File(f)
+   # Daha sonra bu dosyayı bir parametre olarak gönderebiliriz!
+    await ctx.send(file=picture)
 
-    if message.content.startswith('$hello'):
-        await message.channel.send("Merhaba!")
-    
-    elif message.content.startswith('$sifre'):
-        sifre = bot_mantik.gen_pass()
-        await message.channel.send(f"$sifreniz: {sifre}")
+def get_duck_image_url():    
+    url = 'https://random-d.uk/api/random'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
 
-    elif message.content.startswith('$yazitura'):
-        sonuc = yazi_tura()
-        await message.channel.send(sonuc)
 
-client.run("MTQ3NDExMTA5NzY3MzA5MzE4MQ.G1mJY4.B-NJrLS8XrWtspzPBF5pQzWd63Bvv_D9fhG9EU")
+@bot.command('dog')
+async def dog(ctx):
+    '''dog komutunu çağırdığımızda, program ordek_resmi_urlsi_al fonksiyonunu çağırır.'''
+    image_url = get_dog_image_url({"fileSizeBytes":2494547,"url":"https://random.dog/c6f538b3-92d0-4a81-a4da-9da68f075e55.mp4"})
+    await ctx.send(image_url)
+bot.run("MTQ3NDExMTA5NzY3MzA5MzE4MQ.GxAnNO.sNnhaoMA007cyjFoI40ek1BHrk13pRvMTapHjY")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
